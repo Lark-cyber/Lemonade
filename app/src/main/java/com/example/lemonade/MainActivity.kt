@@ -50,8 +50,12 @@ class MainActivity : ComponentActivity() {
 }
 @Composable
 fun LemonadeApp() {
+
+    // Gère l'étape actuelle et le nombre de pressions restantes
     var currentStep by remember { mutableStateOf(1) }
     var squeezeCount by remember { mutableStateOf(0) }
+
+    // Affiche le titre de l'application dans la barre supérieure
     Scaffold (topBar = {
         Box(
             modifier = Modifier
@@ -70,6 +74,8 @@ fun LemonadeApp() {
     }
     ) { innerPadding ->
         Box(modifier = Modifier.padding(innerPadding)){
+
+            // Affiche l'écran correspondant à l'étape actuelle
             when (currentStep) {
                 1 -> LemonadeDisplay(
                     R.string.lemon_select,
@@ -77,6 +83,8 @@ fun LemonadeApp() {
                     R.string.lemon_tree_content_description,
                     onButtonClick = {
                         currentStep = 2
+
+                        // Choisit aléatoirement le nombre de pressions nécessaires
                         squeezeCount = (2..4).random()
                     }
                 )
@@ -110,6 +118,8 @@ fun LemonadeApp() {
         }
     }
 }
+
+// Affiche l'image et le texte de l'étape actuelle
 @Composable
 fun LemonadeDisplay (
     textResourceId: Int,
